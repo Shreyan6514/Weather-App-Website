@@ -28,15 +28,20 @@ Built with a modern UI and seamless user experience, this app leverages a weathe
 
 ## 🚀 Live Demo
 
-Try it locally: [http://localhost:5173/](http://localhost:5173/)
+Will be live soon.....
 
 ---
 
 ## 🖼️ Screenshot
 
-![Weather App UI Screenshot](./screenshot.png)
-*(Or use the image above if you wish)*
+![Home Page](./assets/screenshot1.png)
+*Home page with weather search and output*
 
+<p float="left">
+  <img src="./assets/screenshot2.png" width="250"/>
+  <img src="./assets/screenshot3.png" width="250"/>
+  <img src="./assets/screenshot4.png" width="250"/>
+</p>
 ---
 
 ## 🚀 How to Run
