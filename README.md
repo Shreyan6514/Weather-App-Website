@@ -38,9 +38,9 @@ Will be live soon.....
 *Home page with weather search and output*
 
 <p float="left">
-  <img src="./assets/screenshot2.png" width="250"/>
-  <img src="./assets/screenshot3.png" width="250"/>
-  <img src="./assets/screenshot4.png" width="250"/>
+  <img src="./assets/screenshot2.png" height="300"/>
+  <img src="./assets/screenshot3.png" height="300"/>
+  <img src="./assets/screenshot4.png" height="300"/>
 </p>
 ---
 
