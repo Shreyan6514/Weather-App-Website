@@ -1,26 +1,18 @@
 import { WeatherData } from '../types/weather';
 
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
 export const fetchWeatherData = async (
   city: string,
   langCode: string = 'en'
 ): Promise<WeatherData> => {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    throw new Error('Supabase configuration is missing. Please check your environment variables.');
-  }
-
-  const apiUrl = `${SUPABASE_URL}/functions/v1/weather`;
+  const apiUrl = `${API_BASE_URL}/api/weather`;
   
-  const headers = {
-    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-    'Content-Type': 'application/json',
-  };
-
   const response = await fetch(apiUrl, {
     method: 'POST',
-    headers,
+    headers: {
+      'Content-Type': 'application/json',
+    },
     body: JSON.stringify({
       city: city.trim(),
       langCode
