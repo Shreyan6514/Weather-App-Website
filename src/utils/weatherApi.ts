@@ -1,29 +1,38 @@
 import { WeatherData } from '../types/weather';
 
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
-const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 export const fetchWeatherData = async (
   city: string,
   langCode: string = 'en'
 ): Promise<WeatherData> => {
-  const url = `${BASE_URL}?q=${encodeURIComponent(city)}&appid=${API_KEY}&lang=${langCode}&units=metric`;
-  
-  if (!API_KEY) {
-    throw new Error('Weather API key is not configured. Please check your environment variables.');
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    throw new Error('Supabase configuration is missing. Please check your environment variables.');
   }
+
+  const apiUrl = `${SUPABASE_URL}/functions/v1/weather`;
   
-  const response = await fetch(url);
+  const headers = {
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json',
+  };
+
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      city: city.trim(),
+      langCode
+    })
+  });
+
   const data = await response.json();
-  
-  if (data.cod === '404' || data.cod === 404) {
-    throw new Error(`City "${city}" not found. Please check the city name.`);
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to fetch weather data');
   }
-  
-  if (data.cod !== 200) {
-    throw new Error('Failed to fetch weather data. Please try again.');
-  }
-  
+
   return data;
 };
 

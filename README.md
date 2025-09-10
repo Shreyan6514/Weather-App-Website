@@ -65,8 +65,12 @@ npm install
 ### 4. Add your environment variables:
 Create a `.env` file in the root directory:
 ```
-VITE_API_KEY=your_openweathermap_api_key
+# Supabase Configuration
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
+
+**Note**: The OpenWeatherMap API key is now configured on the backend (Supabase Edge Function) for security.
 
 ### 5. Start the development server:
 ```bash
